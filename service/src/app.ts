@@ -39,6 +39,6 @@ export default class App {
 
     private setRoutes() {
         // set the poke api routes
-        this.app.use('/api/v1', PokeController.getRoutes());
+        new PokeController(this.app).setRoutes();
     }
 }

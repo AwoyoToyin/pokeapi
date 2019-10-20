@@ -1,19 +1,19 @@
-import { Application, Request, Response, Router } from 'express';
+import { Application, Request, Response } from 'express';
 import { PokeService } from '../services';
 import { logger } from '../utils';
 
 export default class PokeController {
+
+    constructor(private app: Application) { }
 
     /**
      * Sets PokeApi specific routes
      * 
      * @memberof PokeController
      */
-    public static getRoutes() {
-        const router = Router();
-
+    public setRoutes() {
         /** Get most powerful pokemon from supplied names */
-        router.get('/strongest', async (req: Request, res: Response) => {
+        this.app.route('/strongest').get(async (req: Request, res: Response) => {
             try {
                 const { query: { names } } = req;
 
@@ -43,7 +43,5 @@ export default class PokeController {
                 });
             }
         });
-
-        return router;
     }
 }
