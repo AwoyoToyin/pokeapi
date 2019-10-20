@@ -2,15 +2,8 @@ sudo: required
 services:
   - docker
 
-# cache:
-#   directories:
-#     - ./service/node_modules
-
 before_install:
   - docker build -t awoyotoyin/pokeapi-service -f ./service/Dockerfile.dev ./service
-
-before_script:
-  - sh -e /etc/init.d/xvfb start
 
 script:
   # Run our tests
