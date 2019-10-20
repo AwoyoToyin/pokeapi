@@ -1,7 +1,7 @@
 import Config from '../config.interface';
 
 const config: Config = {
-    port: 4040,
+    port: process.env.SERVICE_PORT,
 };
 
 export default config;
