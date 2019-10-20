@@ -25,8 +25,10 @@ $ docker-compose -f "docker-compose.yml" up -d --build
 This command should setup all defined services and run the node app on port 8000 (default)
 ```
 
+Navigate to `http://localhost:9000|8000/api/v1/strongest?names=butterfree,wormadam-plant`
 
-# Running Tests
+
+# Running Tests (Standalone)
 
 This section assumes you have node, npm and yarn installed in your local machine.
 
