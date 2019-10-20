@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+
+  webserver:
+    build:
+      context: ./webserver
+      dockerfile: Dockerfile.dev
+    container_name: poke-webserver
+    depends_on:
+      - service
+    ports:
+      - '9000:80'
+    restart: always
+
+  service:
+    build:
+      context: ./service
+      dockerfile: Dockerfile.dev
+    container_name: poke-service
+    environment:
+      - NODE_ENV=development
+      - SERVICE_PORT=4040
+    ports:
+      - '4040:4040'
+    volumes:
+      - './service:/usr/src/app'
+      - '/usr/src/app/node_modules'
