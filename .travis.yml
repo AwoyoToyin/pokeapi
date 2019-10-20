@@ -1,0 +1,28 @@
+sudo: required
+services:
+  - docker
+
+# cache:
+#   directories:
+#     - ./service/node_modules
+
+before_install:
+  - docker build -t awoyotoyin/pokeapi-service -f ./service/Dockerfile.dev ./service
+
+before_script:
+  - sh -e /etc/init.d/xvfb start
+
+script:
+  # Run our tests
+  - docker run awoyotoyin/poke-service yarn run test
+
+after_success:
+  - docker build -t awoyotoyin/poke-service ./service
+  - docker build -t awoyotoyin/poke-webserver ./webserver
+
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Push images to docker hub
+  - docker push awoyotoyin/poke-service
+  - docker push awoyotoyin/poke-webserver
